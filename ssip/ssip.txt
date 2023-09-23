@@ -1,0 +1,127 @@
+CREATE DATABASE ssip
+
+USE ssip;
+CREATE TABLE Room
+(
+    room_id varchar(50), 
+    room_label varchar(50),
+    room_location varchar(50),
+    room_gender varchar(50),
+    room_window varchar(50),
+    room_monthly_price varchar(50),
+    room_availability varchar(50),
+    room_description varchar(50),
+    CONSTRAINT PKRoom PRIMARY KEY (room_id)
+ )
+
+USE ssip;
+CREATE TABLE Tenant
+(
+    tenant_id varchar(50), 
+    tenant_name varchar(50),
+    tenant_address varchar(100),
+    tenant_ktp_no int(50),
+    tenant_phone int(50),
+    tenant_email varchar(50),
+    tenant_emergcp varchar(50),
+    tenant_emergcp_phone int(50),
+    tenant_emergcp_email varchar(50),
+    tenant_bankaccount varchar(50),
+    tenant_bankaccount_no int(50),
+    CONSTRAINT PKTenant PRIMARY KEY (tenant_id)
+ )
+
+USE ssip;
+CREATE TABLE Book
+(
+    book_id varchar(50), 
+    room_id varchar(50),
+    tenant_id varchar(50),
+    book_start_date varchar(50),
+    book_end_date varchar(50),
+    CONSTRAINT PKBook PRIMARY KEY (book_id),
+    CONSTRAINT FKRoom_id FOREIGN KEY (room_id) REFERENCES Room(room_id),
+    CONSTRAINT FKTenant_id FOREIGN KEY (tenant_id) REFERENCES Tenant(tenant_id)
+ )
+
+USE ssip;
+CREATE TABLE admin
+(
+    username varchar(50),
+    pwd varchar(50),
+    Constraint PKAdmin PRIMARY KEY (username)
+)
+
+INSERT INTO admin (username, pwd)
+VALUES ("wynnepriscillia", "12345"), ("reginarosa", "12345"), ("ratuesther", "12345")
+
+
+USE ssip;
+CREATE TABLE invoice
+(
+    invoice_id varchar(50),
+    datecreate varchar(50),
+    tenant_id varchar(50),
+    tenant_name varchar(50),
+    tenant_address varchar(100),
+    tenant_phone varchar(50),
+    room_label varchar(50),
+    room_monthly_price varchar(50),
+    stayperiod varchar(50),
+    totalamount varchar(50),
+    Constraint PKInvoice PRIMARY KEY (invoice_id),
+    CONSTRAINT FKinvoiceTenant_id FOREIGN KEY (tenant_id) REFERENCES Tenant(tenant_id),
+    CONSTRAINT FKTenant_name FOREIGN KEY (tenant_name) REFERENCES Tenant(tenant_name),
+    CONSTRAINT FKTenant_address FOREIGN KEY (tenant_address) REFERENCES Tenant(tenant_address),
+    CONSTRAINT FKTenant_phone FOREIGN KEY (tenant_phone) REFERENCES Tenant(tenant_phone),
+    CONSTRAINT FKRoom_label FOREIGN KEY (room_label) REFERENCES Room(room_label),
+    CONSTRAINT FKRoom_monthly_price FOREIGN KEY (room_monthly_price) REFERENCES Room(room_monthly_price)
+)
+
+
+USE ssip;
+CREATE TABLE invoice
+(
+    invoice_id varchar(50),
+    date varchar(50),
+    tenant_id varchar(50),
+    tenant_name varchar(50),
+    tenant_address varchar(100),
+    tenant_phone varchar(50),
+    room_label varchar(50),
+    room_monthly_price varchar(50),
+    period varchar(50),
+    totalamount varchar(50),
+    Constraint PKInvoice PRIMARY KEY (invoice_id),
+    CONSTRAINT FKInvoice1 FOREIGN KEY (tenant_id) REFERENCES Tenant(tenant_id),
+    CONSTRAINT FKInvoice2 FOREIGN KEY (tenant_name) REFERENCES Tenant(tenant_name),
+    CONSTRAINT FKInvoice3 FOREIGN KEY (tenant_address) REFERENCES Tenant(tenant_address),
+    CONSTRAINT FKInvoice4 FOREIGN KEY (tenant_phone) REFERENCES Tenant(tenant_phone),
+    CONSTRAINT FKInvoice5 FOREIGN KEY (room_label) REFERENCES Room(room_label),
+    CONSTRAINT FKInvoice6 FOREIGN KEY (room_monthly_price) REFERENCES Room(room_monthly_price)
+)
+
+
+USE ssip;
+CREATE TABLE damage
+(
+    room_id varchar(50),
+    tenant_id varchar(50),
+    room_damage varchar(50),
+    damage_fine int(50),
+    Constraint FKdamage FOREIGN KEY (room_id) REFERENCES Room(room_id),
+    Constraint FKdamage1 FOREIGN KEY (tenant_id) REFERENCES Tenant(tenant_id)
+)
+
+
+
+
+
+room_id = $room_id
+room_label = $room_label
+    room_location = $room_location
+    room_gender = $room_gender
+    room_window = $room_window
+    room_monthly_price = $room_monthly_price
+    room_availability = $room_availability
+    room_description = $room_description
